@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -35,11 +35,12 @@ public class PlayerMovement : MonoBehaviour
 
         movementRightLeft(horizontalInput);
 
+
         playerAnimator.SetBool("isRun", horizontalInput != 0);
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetButtonDown("Jump"))
         {
-            playerBody.velocity = new Vector2(playerBody.velocity.x, jumpPower); 
+            playerBody.velocity = new Vector2(playerBody.velocity.x, jumpPower);
         }
     }
 
@@ -47,14 +48,11 @@ public class PlayerMovement : MonoBehaviour
     {
         playerBody.velocity = new Vector2(horizontalInput * movementSpeed, playerBody.velocity.y);
 
-        if (horizontalInput > 0.01f)
+        if(horizontalInput > 0.01f)
         {
-            // tengok kanan
             transform.localScale = Vector3.one;
-        }
-        else if (horizontalInput < -0.01f)
+        }else if(horizontalInput < -0.01f)
         {
-            // tengok kiri
             transform.localScale = new Vector3(-1, 1, 1);
         }
     }
