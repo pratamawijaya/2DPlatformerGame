@@ -56,7 +56,6 @@ public class PlayerMovement : MonoBehaviour
         }else if(horizontalInput < 0f)
         {
             spriteRenderer.flipX = true;
-            //transform.localScale = new Vector3(-1, 1, 1);
         }
     }
 }
