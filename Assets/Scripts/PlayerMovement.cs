@@ -32,8 +32,11 @@ public class PlayerMovement : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
 
         movementRightLeft(horizontalInput);
-            
-        
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            playerBody.velocity = new Vector2(playerBody.velocity.x, jumpPower); 
+        }
     }
 
     private void movementRightLeft(float horizontalInput)
