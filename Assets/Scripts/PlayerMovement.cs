@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D playerBody;
     private BoxCollider2D boxCollider;
+    private Animator playerAnimator;
 
     private float horizontalInput;
 
@@ -18,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     {
         playerBody = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
+        playerAnimator = GetComponent<Animator>();
     }
 
     // Start is called before the first frame update
@@ -32,6 +34,8 @@ public class PlayerMovement : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
 
         movementRightLeft(horizontalInput);
+
+        playerAnimator.SetBool("isRun", horizontalInput != 0);
 
         if (Input.GetKey(KeyCode.Space))
         {
