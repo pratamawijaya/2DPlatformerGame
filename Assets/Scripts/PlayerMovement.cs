@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float movementSpeed;
     [SerializeField] private float jumpPower;
+    [SerializeField] private LayerMask jumpableGround;
 
     private Rigidbody2D playerBody;
     private BoxCollider2D boxCollider;
@@ -50,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
         UpdateAnimationState();
 
        
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             playerBody.velocity = new Vector2(playerBody.velocity.x, jumpPower);
         }
@@ -59,8 +60,7 @@ public class PlayerMovement : MonoBehaviour
     private void UpdateAnimationState()
     {
 
-        LogMe($"movement speed {horizontalInput * movementSpeed} - y {playerBody.velocity.y}");
-
+        
         playerBody.velocity = new Vector2(horizontalInput * movementSpeed, playerBody.velocity.y);
 
 
@@ -100,6 +100,21 @@ public class PlayerMovement : MonoBehaviour
        
 
        
+    }
+
+    private bool IsGrounded()
+    {
+        bool isGrounded = Physics2D.BoxCast(
+            boxCollider.bounds.center,
+            boxCollider.bounds.size,
+            0f, 
+            Vector2.down,
+            .1f,
+            jumpableGround
+            );
+
+        LogMe("Is Grounded : " + isGrounded);
+        return isGrounded;
     }
 
     private void LogMe(string message)
