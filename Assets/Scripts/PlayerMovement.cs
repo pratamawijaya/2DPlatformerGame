@@ -16,6 +16,17 @@ public class PlayerMovement : MonoBehaviour
 
     private float horizontalInput;
 
+    // state
+    private enum MovementState
+    {
+        idle, // 0
+        running, // 1
+        jumping, // 2
+        falling // 3
+    }
+
+    private MovementState playerState = MovementState.idle;
+
     private void Awake()
     {
         playerBody = GetComponent<Rigidbody2D>();
@@ -35,27 +46,64 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalInput = Input.GetAxis("Horizontal");
 
-        movementRightLeft(horizontalInput);
+       
+        UpdateAnimationState();
 
-        // set condition animation
-        playerAnimator.SetBool("isRun", horizontalInput != 0);
-
+       
         if (Input.GetButtonDown("Jump"))
         {
             playerBody.velocity = new Vector2(playerBody.velocity.x, jumpPower);
         }
     }
 
-    private void movementRightLeft(float horizontalInput)
+    private void UpdateAnimationState()
     {
+
+        LogMe($"movement speed {horizontalInput * movementSpeed} - y {playerBody.velocity.y}");
+
         playerBody.velocity = new Vector2(horizontalInput * movementSpeed, playerBody.velocity.y);
+
+
+        MovementState state;
 
         if(horizontalInput > 0f)
         {
             spriteRenderer.flipX = false;
-        }else if(horizontalInput < 0f)
+            state = MovementState.running;
+        }
+        else if(horizontalInput < 0f)
         {
             spriteRenderer.flipX = true;
+            state = MovementState.running;
         }
+        else
+        {
+            state = MovementState.idle;
+        }
+
+        if (playerBody.velocity.y > .1f)
+        {
+            state = MovementState.jumping;
+
+        }
+        else if(playerBody.velocity.y < -.1f)
+        {
+            state = MovementState.falling;
+
+        }
+
+        playerAnimator.SetInteger("state",(int) state);
+    }
+
+    private void movementRightLeft(float horizontalInput)
+    {
+       
+
+       
+    }
+
+    private void LogMe(string message)
+    {
+        Debug.Log("log : " + message);
     }
 }
