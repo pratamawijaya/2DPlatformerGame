@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D playerBody;
     private BoxCollider2D boxCollider;
+    private SpriteRenderer spriteRenderer;
     private Animator playerAnimator;
 
     private float horizontalInput;
@@ -20,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
         playerBody = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
         playerAnimator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Start is called before the first frame update
@@ -35,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
 
         movementRightLeft(horizontalInput);
 
-
+        // set condition animation
         playerAnimator.SetBool("isRun", horizontalInput != 0);
 
         if (Input.GetButtonDown("Jump"))
@@ -48,12 +50,13 @@ public class PlayerMovement : MonoBehaviour
     {
         playerBody.velocity = new Vector2(horizontalInput * movementSpeed, playerBody.velocity.y);
 
-        if(horizontalInput > 0.01f)
+        if(horizontalInput > 0f)
         {
-            transform.localScale = Vector3.one;
-        }else if(horizontalInput < -0.01f)
+            spriteRenderer.flipX = false;
+        }else if(horizontalInput < 0f)
         {
-            transform.localScale = new Vector3(-1, 1, 1);
+            spriteRenderer.flipX = true;
+            //transform.localScale = new Vector3(-1, 1, 1);
         }
     }
 }
