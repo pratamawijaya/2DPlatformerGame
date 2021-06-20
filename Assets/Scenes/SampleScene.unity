@@ -44997,6 +44997,7 @@ GameObject:
   - component: {fileID: 834072334}
   - component: {fileID: 834072335}
   - component: {fileID: 834072336}
+  - component: {fileID: 834072337}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -45021,7 +45022,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
+    oldSize: {x: 6, y: 6}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -45165,6 +45166,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cherriesText: {fileID: 521349772}
+--- !u!114 &834072337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 834072329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aa35405eea884b4eb23fe0cd9a06fa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &870291017 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5693477541900789902, guid: 29a40a366855b484687de5f23786e023, type: 3}
@@ -45652,7 +45665,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5693477541900789902, guid: 29a40a366855b484687de5f23786e023, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.124412335
+      value: 0.49
       objectReference: {fileID: 0}
     - target: {fileID: 5693477541900789902, guid: 29a40a366855b484687de5f23786e023, type: 3}
       propertyPath: m_LocalPosition.z
